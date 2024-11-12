@@ -67,9 +67,11 @@
   font-size: 24px;
   font-weight: 700;
   margin-bottom: 25px;
+  color: #333333;
 }
 
 .LostPostDetail_time_location {
   font-size: 13px;
   margin: 15px 0px;
+  color: #4a423d;
 }
