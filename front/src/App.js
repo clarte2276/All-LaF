@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 
 import LostPostList from './components/lostpostlist/LostPostList';
 import Login from './components/login/Login';
@@ -14,15 +14,15 @@ function App() {
 
   useEffect(() => {
     setScreenSize();
+    window.addEventListener('resize', setScreenSize);
+    return () => window.removeEventListener('resize', setScreenSize);
   }, []);
 
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<LostPostList />} />
-        <Route path="/login" element={<Login />} />
-      </Routes>
-    </Router>
+    <Routes>
+      <Route path="/" element={<LostPostList />} />
+      <Route path="/login" element={<Login />} />
+    </Routes>
   );
 }
 
