@@ -1,0 +1,13 @@
+.Header_body {
+  display: grid;
+  justify-content: center;
+  border-bottom: 1px solid #948a85;
+  box-shadow: 0px 2px 4px rgba(119, 119, 119, 0.1);
+  padding: 15px 0;
+}
+
+.Header_name {
+  font-size: 20px;
+  font-weight: 700;
+  color: #333333;
+}
