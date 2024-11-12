@@ -16,7 +16,7 @@ function NavbarBottom() {
   const { isLoggedIn, isAdmin } = useContext(AuthContext); // AuthContext에서 값 받아오기
 
   // 현재 경로가 /login이면 NavbarBottom 숨기기
-  if (location.pathname === '/login') {
+  if (location.pathname === '/login' || location.pathname === '/Login') {
     return null;
   }
 
@@ -28,27 +28,31 @@ function NavbarBottom() {
   return (
     <>
       {isAdmin ? (
-        <div className="NavbarBottom_layout">
-          {/* 관리자 페이지 */}
-          <Link to="/adminpage">
-            <img src={adminpage} alt="관리자 페이지" />
-          </Link>
-          <Link to="/allboard">
-            <img src={allboard} alt="전체게시판" />
-          </Link>
+        <div className="NavbarBottom_body">
+          <div className="NavbarBottom_layout">
+            {/* 관리자 페이지 */}
+            <Link to="/adminpage">
+              <img className="NavbarBottom_user_img" src={adminpage} alt="관리자 페이지" />
+            </Link>
+            <Link to="/allboard">
+              <img className="NavbarBottom_user_img" src={allboard} alt="전체게시판" />
+            </Link>
+          </div>
         </div>
       ) : (
-        <div className="NavbarBottom_layout">
-          {/* 일반 사용자 페이지 */}
-          <Link to="/">
-            <img src={main} alt="메인" />
-          </Link>
-          <Link to="/categorychoice">
-            <img src={categorychoice} alt="카테고리 선택" />
-          </Link>
-          <Link to="/mypage">
-            <img src={mypage} alt="마이페이지" />
-          </Link>
+        <div className="NavbarBottom_body">
+          <div className="NavbarBottom_layout">
+            {/* 일반 사용자 페이지 */}
+            <Link to="/">
+              <img className="NavbarBottom_user_img" src={main} alt="메인" />
+            </Link>
+            <Link to="/categorychoice">
+              <img className="NavbarBottom_user_img" src={categorychoice} alt="카테고리 선택" />
+            </Link>
+            <Link to="/mypage">
+              <img className="NavbarBottom_user_img" src={mypage} alt="마이페이지" />
+            </Link>
+          </div>
         </div>
       )}
     </>
