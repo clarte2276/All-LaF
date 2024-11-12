@@ -20,6 +20,7 @@ const Login = () => {
 
       if (response.data.success) {
         // 로그인 성공 시 sessionStorage에 loggedIn 값 저장
+        alert('로그인 성공!');
         sessionStorage.setItem('loggedIn', 'true');
         console.log('로그인 상태:', sessionStorage.getItem('loggedIn'));
 
