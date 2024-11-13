@@ -58,9 +58,11 @@ const LostPostDetail = () => {
       </div>
       <div className="LostPostDetail_lost-post-detail">
         <div className="LostPostDetail_lostitem">{lostItemData.itemType || '분실물'}</div>
-        <div className="LostPostDetail_time_location">분실 시간: {lostItemData.lostTime}</div>
-        <div className="LostPostDetail_time_location">분실 장소: {lostItemData.lostLocation}</div>
-        <div className="LostPostDetail_time_location">보관 장소: {lostItemData.storageLocation}</div>
+        <div className="LostPostDetail_time_location">분실 시간 : {lostItemData.lostTime || '시간 정보 없음'}</div>
+        <div className="LostPostDetail_time_location">분실 장소 : {lostItemData.lostLocation || '위치 정보 없음'}</div>
+        <div className="LostPostDetail_time_location">
+          보관 장소 : {lostItemData.storageLocation || '위치 정보 없음'}
+        </div>
 
         {/* 지도 렌더링 */}
         <div className="LostPostDetail_map-container">{renderMap()}</div>
