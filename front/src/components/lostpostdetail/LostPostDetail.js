@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+
+import Map from '../map/Map';
 import LostPostDetailPopUp from './LostPostDetailPopUp';
+
 import './LostPostDetail.css';
 
 const LostPostDetail = () => {
@@ -33,13 +36,14 @@ const LostPostDetail = () => {
 
   const renderMap = () => {
     if (lostItemData.storageLocation === '정보문화관') {
-      return <img src="정보문화관 지도 URL" alt="정보문화관 지도" className="LostPostDetail_map-image" />; // 임시 URL
+      return <Map selectedLocation="infoculture" />;
     } else if (lostItemData.storageLocation === '원흥관') {
-      return <img src="원흥관 지도 URL" alt="원흥관 지도" className="LostPostDetail_map-image" />; // 임시 URL
+      return <Map selectedLocation="wonheung" />;
     } else if (lostItemData.storageLocation === '신공학관') {
-      return <img src="신공학관 지도 URL" alt="신공학관 지도" className="LostPostDetail_map-image" />; // 임시 URL
+      return <Map selectedLocation="newengineering" />;
     } else {
-      return <div className="LostPostDetail_map_message">보관 장소에 대한 지도가 없습니다.</div>;
+      // return <div className="LostPostDetail_map_message">보관 장소에 대한 지도가 없습니다.</div>;
+      return <Map selectedLocation="infoculture" />;
     }
   };
 

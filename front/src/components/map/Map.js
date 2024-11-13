@@ -4,17 +4,18 @@ import './Map.css';
 
 const { kakao } = window;
 
-const Map = ({ selectedLocation }) => {
+const Map = ({ selectedLocation, height = '175px', level = 3 }) => {
   useEffect(() => {
     const container = document.getElementById('map');
+    if (!container) return;
+
     const options = {
       center: new kakao.maps.LatLng(37.558883838702705, 126.99848057788074), // 고정된 초기 위치
-      level: 2,
+      level: level,
     };
 
     const map = new kakao.maps.Map(container, options);
 
-    // 각 위치별로 마커 위치와 클릭 시 표시될 정보 설정
     const locations = {
       infoculture: [
         {
@@ -45,43 +46,57 @@ const Map = ({ selectedLocation }) => {
     };
 
     const selectedCoordinates = locations[selectedLocation];
-    if (selectedCoordinates) {
-      selectedCoordinates.forEach((coord) => {
-        const markerPosition = new kakao.maps.LatLng(coord.lat, coord.lng);
-        const marker = new kakao.maps.Marker({
-          position: markerPosition,
-        });
-        marker.setMap(map);
 
-        // InfoWindow에 스타일 적용
-        const infoWindow = new kakao.maps.InfoWindow({
-          content: `
-            <div class="Map_custom-info-window">
-              ${coord.message}
-            </div>`,
-        });
+    // SVG 마커 이미지 설정
+    const markerImageSrc = `data:image/svg+xml;utf-8,
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="35" viewBox="0 0 24 35">
+  <path fill="%23D04020" d="M12 0C6.477 0 2 4.477 2 10c0 7.333 10 23 10 23s10-15.667 10-23C22 4.477 17.523 0 12 0z"/>
+  <circle cx="12" cy="10" r="3" fill="%23fff"/>
+</svg>`;
+    const markerImageSize = new kakao.maps.Size(24, 35);
+    const markerImageOption = { offset: new kakao.maps.Point(12, 35) };
+    const markerImage = new kakao.maps.MarkerImage(markerImageSrc, markerImageSize, markerImageOption);
 
-        let isOpen = false;
-
-        // 마커 클릭 이벤트 추가
-        kakao.maps.event.addListener(marker, 'click', () => {
-          if (isOpen) {
-            infoWindow.close();
-          } else {
-            infoWindow.open(map, marker);
-          }
-          isOpen = !isOpen;
-        });
+    // 마커 생성 함수
+    const createMarker = (coord) => {
+      const markerPosition = new kakao.maps.LatLng(coord.lat, coord.lng);
+      const marker = new kakao.maps.Marker({
+        position: markerPosition,
+        image: markerImage,
       });
 
-      const centerPosition = new kakao.maps.LatLng(selectedCoordinates[0].lat, selectedCoordinates[0].lng);
-      map.setCenter(centerPosition);
+      // InfoWindow HTML 문자열 생성
+      const infoWindow = new kakao.maps.InfoWindow({
+        content: `<div class="Map_custom-info-window">${coord.message}</div>`,
+      });
+
+      let isOpen = false;
+
+      // 마커 클릭 이벤트 추가
+      kakao.maps.event.addListener(marker, 'click', () => {
+        if (isOpen) {
+          infoWindow.close();
+        } else {
+          infoWindow.open(map, marker);
+        }
+        isOpen = !isOpen;
+      });
+
+      marker.setMap(map);
+
+      // 지도 중심을 마커 위치로 이동
+      map.setCenter(markerPosition);
+    };
+
+    // 선택된 위치의 각 좌표에 대해 마커 생성
+    if (selectedCoordinates) {
+      selectedCoordinates.forEach((coord) => createMarker(coord));
     }
 
     map.relayout();
-  }, [selectedLocation]);
+  }, [selectedLocation, level]);
 
-  return <div id="map" style={{ width: '350px', height: '250px' }}></div>;
+  return <div id="map" className="Map_map" style={{ width: '100%', height }}></div>;
 };
 
 export default Map;

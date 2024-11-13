@@ -50,11 +50,7 @@
 
 .CategoryChoice_map {
   height: 250px;
-  display: grid;
-  align-items: center;
-  justify-content: center;
-  /* background-color: #e0e0e0; */
-  /* color: #666; */
+  width: 100%;
 }
 
 .CategoryChoice_location_phone {

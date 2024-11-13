@@ -6,6 +6,7 @@ import newengineeringBuilding from '../../images/Category22.png';
 import wonheungBuilding from '../../images/Category33.png';
 import etc from '../../images/Category44.png';
 
+import AdminMap from '../map/AdminMap';
 import './AdminPage.css';
 
 function AdminPage() {
@@ -17,6 +18,16 @@ function AdminPage() {
       alert('Coming Soon!');
     } else {
       setSelectedLocation((prevLocation) => (prevLocation === location ? '' : location));
+    }
+  };
+
+  const handleNavigate = () => {
+    if (selectedLocation === 'info-building') {
+      navigate('/cctv/infoculture');
+    } else if (selectedLocation === 'newengineering-building') {
+      navigate('/cctv/newengineering');
+    } else if (selectedLocation === 'wonheung-building') {
+      navigate('/cctv/wonheung');
     }
   };
 
@@ -40,29 +51,18 @@ function AdminPage() {
         </div>
       </div>
 
-      {/* 선택된 장소에 따라 지도와 정보 표시 (토글된 경우에만 표시) */}
-      {selectedLocation && (
-        <div className="AdminPage_map_all">
-          <div>
-            <div className="AdminPage_map">{selectedLocation} 지도 표시 영역</div>
-          </div>
+      {/* 선택된 장소에 따라 지도와 정보 표시 */}
+      <div className="AdminPage_map_all">
+        <AdminMap selectedLocation={selectedLocation} height="250px" level={3} />
 
-          <button
-            className="AdminPage_itemLocation_btn"
-            onClick={() => {
-              if (selectedLocation === 'info-building') {
-                navigate('/cctv/infoculture');
-              } else if (selectedLocation === 'newengineering-building') {
-                navigate('/cctv/newengineering');
-              } else if (selectedLocation === 'wonheung-building') {
-                navigate('/cctv/wonheung');
-              }
-            }}
-          >
+        {/* 선택된 위치가 있을 때만 이동하기 버튼 표시 */}
+        {selectedLocation && (
+          <button className="AdminPage_itemLocation_btn" onClick={handleNavigate}>
             이동하기
           </button>
-        </div>
-      )}
+        )}
+      </div>
+
       <div className="AdminPage_pickup_code_all">
         <div className="AdminPage_pickup_code">수취 확인 코드 : abxd1234</div>
       </div>

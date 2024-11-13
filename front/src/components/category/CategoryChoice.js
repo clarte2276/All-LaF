@@ -78,7 +78,7 @@ const CategoryChoice = () => {
         {selectedLocation && (
           <div className="CategoryChoice_map_phone_all">
             <div className="CategoryChoice_map">
-              <Map selectedLocation={selectedLocation} />
+              <Map selectedLocation={selectedLocation} height="250px" />
             </div>
             <div className="CategoryChoice_location_phone">
               해당건물 담당자 번호 : {selectedLocation === 'infoculture' && '02-1234-5678'}

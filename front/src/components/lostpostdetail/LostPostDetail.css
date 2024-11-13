@@ -40,7 +40,8 @@
 
 /* 지도 컨테이너 */
 .LostPostDetail_map-container {
-  margin-top: 20px;
+  margin: 20px 0px;
+  margin-top: 40px;
   text-align: center;
 }
 
@@ -57,9 +58,7 @@
   width: 100%;
   height: 170px;
   background-color: #f4f5f6;
-  margin: 20px 0px;
   color: #808080;
-  margin-top: 40px;
   font-size: 15px;
 }
 
