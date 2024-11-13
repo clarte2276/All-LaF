@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import Map from '../map/Map';
+
 import card from '../../images/Category1.png';
 import wallet from '../../images/Category2.png';
 import umbrella from '../../images/Category3.png';
@@ -57,13 +59,13 @@ const CategoryChoice = () => {
         <div className="CategoryChoice_itemLocation_all">
           <div className="CategoryChoice_bigname">분실물 장소</div>
           <div className="CategoryChoice_icon_layout">
-            <div onClick={() => handleLocationClick('info-building')}>
+            <div onClick={() => handleLocationClick('infoculture')}>
               <img className="CategoryChoice_categoryImg" src={infoBuilding} alt="정보문화관" />
             </div>
-            <div onClick={() => handleLocationClick('newengineering-building')}>
+            <div onClick={() => handleLocationClick('newengineering')}>
               <img className="CategoryChoice_categoryImg" src={newengineeringBuilding} alt="신공학관" />
             </div>
-            <div onClick={() => handleLocationClick('wonheung-building')}>
+            <div onClick={() => handleLocationClick('wonheung')}>
               <img className="CategoryChoice_categoryImg" src={wonheungBuilding} alt="원흥관" />
             </div>
             <div onClick={() => handleLocationClick('etc')}>
@@ -75,22 +77,22 @@ const CategoryChoice = () => {
         {/* 선택된 장소에 따라 지도와 정보 표시 (토글된 경우에만 표시) */}
         {selectedLocation && (
           <div className="CategoryChoice_map_phone_all">
-            <div>
-              <div className="CategoryChoice_map">{selectedLocation} 지도 표시 영역</div>
+            <div className="CategoryChoice_map">
+              <Map selectedLocation={selectedLocation} />
             </div>
             <div className="CategoryChoice_location_phone">
-              해당건물 담당자 번호 : {selectedLocation === 'info-building' && '02-1234-5678'}
-              {selectedLocation === 'newengineering-building' && '02-2345-6789'}
-              {selectedLocation === 'wonheung-building' && '02-3456-7890'}
+              해당건물 담당자 번호 : {selectedLocation === 'infoculture' && '02-1234-5678'}
+              {selectedLocation === 'newengineering' && '02-2345-6789'}
+              {selectedLocation === 'wonheung' && '02-3456-7890'}
             </div>
             <button
               className="CategoryChoice_itemLocation_btn"
               onClick={() => {
-                if (selectedLocation === 'info-building') {
+                if (selectedLocation === 'infoculture') {
                   navigate('/category/infoculture');
-                } else if (selectedLocation === 'newengineering-building') {
+                } else if (selectedLocation === 'newengineering') {
                   navigate('/category/newengineering');
-                } else if (selectedLocation === 'wonheung-building') {
+                } else if (selectedLocation === 'wonheung') {
                   navigate('/category/wonheung');
                 }
               }}

@@ -53,8 +53,8 @@
   display: grid;
   align-items: center;
   justify-content: center;
-  background-color: #e0e0e0;
-  color: #666;
+  /* background-color: #e0e0e0; */
+  /* color: #666; */
 }
 
 .CategoryChoice_location_phone {
